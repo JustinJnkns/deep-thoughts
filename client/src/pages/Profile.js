@@ -4,6 +4,8 @@ import ThoughtList from '../components/ThoughtList';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_USER } from '../utils/queries';
 import FriendList from '../components/FriendList';
+
+// this is a functional component
 const Profile = () => {
   const { username: userParam } = useParams();
 
