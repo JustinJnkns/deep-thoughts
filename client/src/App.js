@@ -11,11 +11,18 @@ import NoMatch from './pages/NoMatch';
 import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
-
 import Home from './pages/Home';
 // establishes new connection to graghQL server using apollo
+
 const client = new ApolloClient({
-  // uniform resource identifier
+ request: operation =>{
+   const token = localStorage.getItem('id_token')
+   operation.setContext({
+     headers:{
+       authorization:token? `Bearer ${token}`: ''
+     }
+   })
+ },
   uri:'/graphql'
 })
 

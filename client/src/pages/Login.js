@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN_USER } from '../utils/mutations';
+import Auth from '../utils/auth'
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN_USER)
   // update state based on form input changes
   const handleChange = (event) => {
-    const { name, value } = event.target;
+  const { name, value } = event.target;
 
     setFormState({
       ...formState,
@@ -24,8 +25,8 @@ const handleFormSubmit = async event => {
       // ...is spread operator variables in mutation will be key/value pairs
       variables: { ...formState }
     });
-
-    console.log(data);
+    // sets token to local storage and brings us back to homepage
+    Auth.login(data.login.token)
   } catch (e) {
     console.error(e);
   }
